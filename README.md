@@ -50,7 +50,7 @@ python run_scHSC.py --dataset Quake_10x_Bladder --t 1 --highly_genes 2000 --k 18
 - target_clusters: the number of clusters to assign to the data. default as the ground truth number of clusters.
 
 ## Datasets
-The datasets used for testing scHSC are available in the [data](./data/) folder and google driver [data](https://drive.google.com/drive/folders/1yhzh4gPbqDr36p7h5Wa2cRIe9FVDvNow?usp=drive_link).
+The datasets used for testing scHSC are available in the [data](./data/) folder and google drive [data](https://drive.google.com/drive/folders/1yhzh4gPbqDr36p7h5Wa2cRIe9FVDvNow?usp=drive_link).
 | Datasets                  | Organ               | Cells | Genes | Class | Platform   | Reference                                      |
 |---------------------------|---------------------|-------|-------|-------|------------|------------------------------------------------|
 | Adam                      | Kidney              | 3660  | 23797 | 8     | Drop-seq   | [Adam et al. ](https://doi.org/10.1242/dev.151142)   |
