@@ -126,8 +126,8 @@ class scHSCModel:
         self.model = HSCNetwork(input_dim = self.X_filtered.shape[1], dataset_size = self.X_filtered.shape[0], 
                                 hidden_dim = dims, batch_size = self.batch_size, drop_rate = drop_rate, device = self.device)
 
-        # if self.info:
-        #     print(self.model)
+        if self.info:
+            print(f"Classify the data into {target_clusters} distinct clusters...")
         self.A, self.X_filtered = map(lambda x: torch.tensor(x).to(self.device), (self.A, self.X_filtered))
         self.model.to(self.device)
 
