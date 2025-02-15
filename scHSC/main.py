@@ -24,7 +24,7 @@ class scHSCModel:
         if not os.path.exists(os.path.dirname(os.path.abspath(log_path))): 
             os.makedirs(os.path.dirname(os.path.abspath(log_path)))
 
-        self.log = create_logger('',fh=log_path)
+        self.log = create_logger('scHSC',fh=log_path)
         if self.info:
             self.log.info('Create log file...')
             self.log.info('Create scHSCModel Object Done...')
@@ -127,7 +127,7 @@ class scHSCModel:
                                 hidden_dim = dims, batch_size = self.batch_size, drop_rate = drop_rate, device = self.device)
 
         if self.info:
-            print(f"Classify the data into {target_clusters} distinct clusters...")
+            self.log.info(f"Classify the data into {target_clusters} distinct clusters...")
         self.A, self.X_filtered = map(lambda x: torch.tensor(x).to(self.device), (self.A, self.X_filtered))
         self.model.to(self.device)
 
