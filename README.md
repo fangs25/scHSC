@@ -31,7 +31,7 @@ pip install pandas==2.0.3 scipy==1.10.1 scikit-learn==1.3.0 matplotlib==3.7.2 se
 4. install single cell analysis dependencies
 ```
 pip install anndata==0.9.2  scanpy==1.9.3
-conda install conda-forge::python-annoy==1.17.2
+pip install annoy==1.17.2
 pip install igraph==0.10.6 louvain==0.8.1
 ```
 
