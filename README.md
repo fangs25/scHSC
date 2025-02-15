@@ -25,7 +25,6 @@ conda activate scHSC
 ```
 pip install numpy==1.24.4 pillow==10.0.0 typing-extensions==4.7.1
 pip install torch==1.8.1+cu101 torchvision==0.9.1+cu101 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
-# pip install torch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1  # more general but may lead to minor variations in the results
 pip install pandas==2.0.3 scipy==1.10.1 scikit-learn==1.3.0 matplotlib==3.7.2 seaborn==0.12.2 umap-learn==0.5.3 numba==0.57.1
 ```
 
@@ -38,7 +37,10 @@ pip install igraph==0.10.6 louvain==0.8.1
 
 ## Usage
 To run scHSC, users can either execute the provided command or run the [run_scHSC.sh](./run_scHSC.sh) script after placing all datasets downloaded from Google [Drive](https://drive.google.com/drive/folders/1yhzh4gPbqDr36p7h5Wa2cRIe9FVDvNow?usp=drive_link) into the [data](./data) folder.
+
 For more detailed configuration options and umap visulization, please refer to the [Tutorial](./tutorial.ipynb).
+
+All the scHSC experiments were executed on a system with Ubuntu 16.04.1 LTS and CUDA 10.1.
 ```
 python run_scHSC.py --dataset Quake_10x_Bladder --t 1 --highly_genes 2000 --k 18 --target_clusters 4 
 ```
