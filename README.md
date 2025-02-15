@@ -24,7 +24,7 @@ conda activate scHSC
 3. install pytorch 
 ```
 pip install numpy==1.24.4 pillow==10.0.0 typing-extensions==4.7.1
-pip install torch==1.8.1+cu101 torchvision==0.9.1+cu101 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
+pip install torch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1
 pip install pandas==2.0.3 scipy==1.10.1 scikit-learn==1.3.0 matplotlib==3.7.2 seaborn==0.12.2 umap-learn==0.5.3 numba==0.57.1
 ```
 
