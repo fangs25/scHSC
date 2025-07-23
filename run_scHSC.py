@@ -9,12 +9,14 @@ parser.add_argument('--t', type=int, default=1, help='number of laplacian filter
 parser.add_argument('--highly_genes', type=int, default=2000, help='number of highly variable genes')
 parser.add_argument('--k', type=int, default=18, help='number of nearest neighbors')
 parser.add_argument('--target_clusters', type=int, default=0, help='number of clusters to assign')
+parser.add_argument('--wzinb', type=float, default=0, help='fixed weight of ZINB loss')
 args = parser.parse_args()
 dataset = args.dataset
 t = args.t
 highly_genes = args.highly_genes
 k = args.k
 target_clusters = args.target_clusters
+wzinb = args.wzinb
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 file = f'./temp/scHSC.csv'
@@ -31,7 +33,7 @@ try:
     log_path = f"{save_dir}/{dataset}_log.txt"
 
     schsc = scHSCModel(log_path=log_path, info=True)
-    adata = schsc.preprocess(adata_raw, t = t, k = k, highly_genes = highly_genes, preprocessed = False, lap__filter = True, approx = True, lap_sparse = True) 
+    adata = schsc.preprocess(adata_raw, t = t, k = k, highly_genes = highly_genes, wzinb = wzinb) 
     schsc.train(adata, target_clusters = nclusters)
 
     from sklearn.metrics.cluster import adjusted_rand_score,normalized_mutual_info_score
