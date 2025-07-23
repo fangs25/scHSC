@@ -131,7 +131,7 @@ class scHSCModel:
     def train(self, adata, target_clusters = 8, dims = 32, batch_size = 512, drop_rate = 0.5,
               iterations = 100, lr = 0.00001, sep = 3,  #  lr=0.00001!
               alpha = 0.5, beta = 1, tau = 0.9, louvain = True, leiden = False, 
-              patience=1, delta=0, warm_up = True, wzinb = 0):
+              patience=1, delta=0, warm_up = True, wzinb = 0, init_method = 'kaiming_uniform_'):
         """
         Train the hard sample contrastive learning model.
 
@@ -182,6 +182,7 @@ class scHSCModel:
         if self.info:
             self.log.info(f"Classify the data into {target_clusters} distinct clusters...")
         self.model.to(self.device)
+        init_weights(self.model, method=init_method)
 
         optimizer = optim.Adam(self.model.parameters(), lr=lr)
         scheduler_ExponentialLR = ExponentialLR(optimizer, gamma=0.98)
@@ -461,3 +462,13 @@ class scHSCModel:
         M_1 = torch.diag(M_mat_12)
         return M_1, M_mat_11, M_mat_12, M_mat_22
     
+def init_weights(model, method='kaiming_uniform'):
+    for m in model.modules():
+        if isinstance(m, nn.Linear):
+            if method == 'kaiming_uniform':
+                nn.init.kaiming_uniform_(m.weight, nonlinearity='relu')
+            elif method == 'kaiming_normal':
+                nn.init.kaiming_normal_(m.weight, nonlinearity='relu')
+
+            if m.bias is not None:
+                nn.init.zeros_(m.bias)
