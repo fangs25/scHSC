@@ -131,7 +131,7 @@ class scHSCModel:
     def train(self, adata, target_clusters = 8, dims = 32, batch_size = 512, drop_rate = 0.5,
               iterations = 100, lr = 0.00001, sep = 3,  #  lr=0.00001!
               alpha = 0.5, beta = 1, tau = 0.9, louvain = True, leiden = False, 
-              patience=1, delta=0, warm_up = True):
+              patience=1, delta=0, warm_up = True, wzinb = 0):
         """
         Train the hard sample contrastive learning model.
 
@@ -236,8 +236,10 @@ class scHSCModel:
             ZINB_Loss = ZINBLoss(pi = _pi, disp = _disp, scale_factor = sf_batch)
             zinb_loss = ZINB_Loss(x = raw_batch, mean = _mean)
 
-
-            Wzinb = (contrastive_loss / zinb_loss).detach().to(self.device) # detach the Wzinb for preventing breaking graph
+            if wzinb > 0:
+                Wzinb = torch.tensor(wzinb).to(self.device)
+            else:
+                Wzinb = (contrastive_loss / zinb_loss).detach().to(self.device) # detach the Wzinb for preventing breaking graph
             loss = (contrastive_loss + Wzinb*zinb_loss)
             total_loss = weight * loss
             total_loss.backward()
