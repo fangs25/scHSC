@@ -10,6 +10,8 @@ parser.add_argument('--highly_genes', type=int, default=2000, help='number of hi
 parser.add_argument('--k', type=int, default=18, help='number of nearest neighbors')
 parser.add_argument('--target_clusters', type=int, default=0, help='number of clusters to assign')
 parser.add_argument('--wzinb', type=float, default=0, help='fixed weight of ZINB loss')
+parser.add_argument('--init_method', type=str, default='kaiming_uniform_', help='initialize method of linear layer')
+
 args = parser.parse_args()
 dataset = args.dataset
 t = args.t
@@ -17,6 +19,7 @@ highly_genes = args.highly_genes
 k = args.k
 target_clusters = args.target_clusters
 wzinb = args.wzinb
+init_method = args.init_method
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 file = f'./temp/scHSC.csv'
@@ -33,7 +36,7 @@ try:
     log_path = f"{save_dir}/{dataset}_log.txt"
 
     schsc = scHSCModel(log_path=log_path, info=True)
-    adata = schsc.preprocess(adata_raw, t = t, k = k, highly_genes = highly_genes, wzinb = wzinb) 
+    adata = schsc.preprocess(adata_raw, t = t, k = k, highly_genes = highly_genes, wzinb = wzinb, init_method = init_method)
     schsc.train(adata, target_clusters = nclusters)
 
     from sklearn.metrics.cluster import adjusted_rand_score,normalized_mutual_info_score
