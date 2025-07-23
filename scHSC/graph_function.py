@@ -3,6 +3,7 @@ from scipy import sparse as sp
 from sklearn.neighbors import kneighbors_graph
 from sklearn.decomposition import PCA
 from annoy import AnnoyIndex
+from scipy.sparse import lil_matrix
 
 def get_adj(count, k=15, pca=50, mode="connectivity"):
 
@@ -50,10 +51,18 @@ def get_appro_adj(count, k=15, pca=50,):
         tree.add_item(i, countp[i, :])
     tree.build(60)
     
-    A = np.zeros((countp.shape[0], countp.shape[0]))
-    for i in range(countp.shape[0]):
-        indices = tree.get_nns_by_vector(countp[i, :], k, search_k=-1) 
+    # A = np.zeros((countp.shape[0], countp.shape[0]))
+    # for i in range(countp.shape[0]):
+    #     indices = tree.get_nns_by_vector(countp[i, :], k, search_k=-1) 
+    #     A[i, indices] = 1
+    # return A
+    
+    n = countp.shape[0]
+    A = lil_matrix((n, n), dtype=np.float32)
+    for i in range(n):
+        indices = tree.get_nns_by_vector(countp[i, :], k)
         A[i, indices] = 1
-    return A
+
+    return A.tocsr()
     
     
