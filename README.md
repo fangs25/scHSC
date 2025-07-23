@@ -58,7 +58,7 @@ The datasets used for testing scHSC are available in the [data](./data/) folder 
 |---------------------------|---------------------|-------|-------|-------|------------|------------------------------------------------|
 | Adam                      | Kidney              | 3660  | 23797 | 8     | Drop-seq   | [Adam et al. ](https://doi.org/10.1242/dev.151142)   |
 | Bach                      | Gammary Gland       | 23184 | 19965 | 8     | 10x        | [Bach et al. ](https://www.nature.com/articles/s41467-017-02001-5)   |
-| Camp                      | Liver               | 777   | 19020 | 7     | SMARTer    | [Camp et al. ](https://www.nature.com/articles/nature22796)   |
+| Heart LV                  | Heart               | 107249| 33538 | 12    | 10x        | [Kanemaruetal et al. ](https://www.nature.com/articles/s41586-023-06311-1)   |
 | Klein                     | Embryonic Stem Cell | 2717  | 24047 | 4     | inDrop     | [Klein et al. ](https://doi.org/10.1016/j.cell.2015.04.044)      |
 | Macosko                   | Retina              | 44808 | 24658 | 12    | Drop-Seq   | [Macosko et al. ](https://doi.org/10.1016/j.cell.2015.05.002)    |
 | Muraro                    | Pancreas            | 2122  | 19046 | 9     | CEL-seq2   | [Muraro et al. ](https://doi.org/10.1016/j.cels.2016.09.002)    |
